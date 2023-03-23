@@ -22,9 +22,11 @@ dev = [
     "pytest",
     "pytest-cov",
     "pre-commit",
-    "openpecha"
 ]
 
+dependencies = [
+    "openpecha",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/OpenPecha/openpecha-project-template"

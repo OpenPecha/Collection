@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from items.item import Item
+from collection.items.item import Item
 
 class ViewSerializer:
 

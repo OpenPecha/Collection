@@ -1,4 +1,14 @@
-from items.item import Item
+from collection.items.item import Item
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class PechaMeta:
+    id: str
+    title: str
+    bdrc_id: str
+    volume_number:str
+    base_name:str
+    pecha_path:str
 
 class Pecha(Item):
 
@@ -9,3 +19,6 @@ class Pecha(Item):
         self.volume_number = volume_number
         self.base_name = base_name
         self.pecha_path = pecha_path
+
+if __name__ == "__main__":
+    print(PechaMeta.__annotations__)

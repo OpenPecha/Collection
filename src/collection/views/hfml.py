@@ -5,9 +5,8 @@ from typing import List
 
 from openpecha.serializers.hfml import HFMLSerializer
 
-from items.item import Item
-from views.view import View, ViewSerializer
-
+from collection.items.item import Item
+from collection.views.view import View, ViewSerializer
 
 class HFMLViewSerializer(ViewSerializer):
 

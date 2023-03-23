@@ -15,10 +15,13 @@ def get_opf_bases(opf_path:str):
 class PlainBaseViewSerializer(ViewSerializer):
 
     def serialize(self, pecha: PechaMeta, output_dir: Path):
+        views_path = []
         base_names = get_opf_bases(pecha.pecha_path)
         for base_name in base_names:
             base_text = base_name.read_text(encoding="utf-8")
             Path(f"{output_dir}/{base_name.name}").write_text(base_text, encoding='utf-8')
+            views_path.append( Path(f"{output_dir}/{base_name.name}"))
+        return views_path
 
 class PlainBaseView(View):
 

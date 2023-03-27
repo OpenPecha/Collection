@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
-
 from collection.items.item import Item
+
 
 class ViewSerializer:
 
@@ -23,6 +23,8 @@ class View:
             'name': self.name,
             'serializer_class': self.serializer_class.__name__
         }
+    
+
     
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         return NotImplementedError("Please implement save catalog")

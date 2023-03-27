@@ -1,8 +1,9 @@
 import csv
 from pathlib import Path
 from typing import List
-from collection.items.pecha import Pecha,PechaMeta
+from collection.items.pecha import Pecha
 from collection.views.view import View, ViewSerializer
+
 
 def get_opf_bases(opf_path:str):
     bases = []
@@ -14,7 +15,8 @@ def get_opf_bases(opf_path:str):
 
 class PlainBaseViewSerializer(ViewSerializer):
 
-    def serialize(self, pecha: PechaMeta, output_dir: Path):
+    @classmethod
+    def serialize(self, pecha: Pecha, output_dir: Path):
         views_path = []
         base_names = get_opf_bases(pecha.pecha_path)
         for base_name in base_names:
@@ -22,11 +24,17 @@ class PlainBaseViewSerializer(ViewSerializer):
             Path(f"{output_dir}/{base_name.name}").write_text(base_text, encoding='utf-8')
             views_path.append( Path(f"{output_dir}/{base_name.name}"))
         return views_path
+    
 
 class PlainBaseView(View):
+    def __init__(self) -> None:
+        name = "PlainBaseView"
+        serializer= PlainBaseViewSerializer
+        super().__init__(name, serializer)
 
-    def __init__(self, name: str, serializer_class: ViewSerializer) -> None:
-        super().__init__(name, serializer_class)
+    def serialize(self, pecha: Pecha, output_dir: Path):
+        views_path = self.serializer_class.serialize(pecha,output_dir)
+        return views_path
 
     def save_catalog(self, collection_dir: Path, items: List[Pecha]):
         catalog_file_path = collection_dir / f"Catalog_{self.name}.csv"

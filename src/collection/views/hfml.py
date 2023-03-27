@@ -1,10 +1,7 @@
 import csv
 from pathlib import Path
 from typing import List
-
-
 from openpecha.serializers.hfml import HFMLSerializer
-
 from collection.items.item import Item
 from collection.views.view import View, ViewSerializer
 

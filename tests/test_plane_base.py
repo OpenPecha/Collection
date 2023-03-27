@@ -1,5 +1,5 @@
 from collection.views.plain_base import PlainBaseViewSerializer
-from collection.items.pecha import PechaMeta
+from collection.items.pecha import Pecha
 from pathlib import Path
 
 serializer = PlainBaseViewSerializer()
@@ -13,7 +13,7 @@ def test_plane_base_view_serializer():
     bdrc_id =""
     volume_number=1
     base_name = ""
-    pecha = PechaMeta(
+    pecha = Pecha(
         id=id,
         title=title,
         volume_number=volume_number,

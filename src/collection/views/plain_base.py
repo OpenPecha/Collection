@@ -33,7 +33,8 @@ class PlainBaseView(View):
         super().__init__(name, serializer)
 
     def serialize(self, pecha: Pecha, output_dir: Path):
-        self.serializer_class.serialize(pecha,output_dir)
+        views_path = self.serializer_class.serialize(pecha,output_dir)
+        return views_path
 
     def save_catalog(self, collection_dir: Path, items: List[Pecha]):
         catalog_file_path = collection_dir / f"Catalog_{self.name}.csv"

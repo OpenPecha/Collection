@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import List
 from openpecha.core.ids import get_collection_id
 from openpecha.utils import dump_yaml
-from views.view import View
+from collection.views.view import View
 
 
 class Collection:
@@ -35,7 +35,7 @@ class Collection:
         dump_yaml(collection, collection_file_path)
     
     def save_view(self, view: View):
-        view_dir = self.collection_dir / view.name
+        view_dir = self.collection_dir / f"{self.collection_dir.stem}.opc" / view.name
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()

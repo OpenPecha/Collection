@@ -1,4 +1,6 @@
-class Item:
+from dataclasses import dataclass
 
-    def __init__(self, id:str) -> None:
-        self.id = id
+
+@dataclass
+class Item:
+    id: str

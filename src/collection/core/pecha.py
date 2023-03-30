@@ -1,21 +1,18 @@
-import csv
 from pathlib import Path
 from typing import List
 
-from collection.core import Collection
 from views.view import View
+
+from collection.core.collection import Collection
 
 
 class PechaCollection(Collection):
-
-    def __init__(self, title:str, items, views:List[View], parent_dir: Path, id=None) -> None:
+    def __init__(
+        self, title: str, items, views: List[View], parent_dir: Path, id=None
+    ) -> None:
         super().__init__(
-            title=title,
-            items=items,
-            views=views,
-            parent_dir=parent_dir,
-            id=id
-            )
+            title=title, items=items, views=views, parent_dir=parent_dir, id=id
+        )
 
     def save_readme(self):
         readme = f"""

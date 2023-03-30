@@ -1,6 +1,8 @@
+from typing import List, Optional, Union
+
 from pydantic import BaseModel
-from typing import List,Optional
-from collection.items.pecha import Pecha,PechaFragment
+
+from collection.items.pecha import Pecha, PechaFragment
 
 
 class Work(BaseModel):
@@ -9,5 +11,5 @@ class Work(BaseModel):
     alternative_title: Optional[str]
     bdrc_work_id: str
     authors: List[str]
-    best_instance:Optional[Pecha]
-    instances: Optional[List[Pecha or PechaFragment]]
+    best_instance: Optional[Pecha]
+    instances: Optional[List[Union[Pecha, PechaFragment]]]

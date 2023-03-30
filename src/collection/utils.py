@@ -1,6 +1,5 @@
-from openpecha.config import BASE_PATH
 from git import Repo
-
+from openpecha.config import BASE_PATH
 
 OPENPECHA_DATA_PREFIX_URL = "https://github.com/OpenPecha-Data"
 

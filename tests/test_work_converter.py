@@ -1,5 +1,5 @@
-from src.collection.converter.work_converter import convert_to_work,convert_to_instance
-from src.collection.items.work import Work,Pecha
+from collection.converter.work_converter import convert_to_work,convert_to_instance
+from collection.items.work import Work,Pecha
 from openpecha.utils import load_yaml
 from pathlib import Path
 import shutil

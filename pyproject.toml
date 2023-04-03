@@ -17,15 +17,18 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+dependencies = [
+    "GitPython",
+    "openpecha",
+    "collection@git+https://github.com/OpenPecha/Collection.git@work-obj-converter"
+
+]
+
 [project.optional-dependencies]
 dev = [
     "pytest",
     "pytest-cov",
     "pre-commit",
-]
-
-dependencies = [
-    "openpecha",
 ]
 
 [project.urls]

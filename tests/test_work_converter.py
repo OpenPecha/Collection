@@ -16,7 +16,7 @@ def test_convert_to_intance():
         id="I9D4B6344",
         title="དྷརྨ་དྷ་ཏུ་སྟ་པ།",
         bdrc_work_id="WA0RT0010",
-        path="/Users/jungtop/.openpecha/I9D4B6344"
+        path="/home/runner/.openpecha/I9D4B6344"
     )
     print(expected_instance)
     print(result_instance)
@@ -41,5 +41,4 @@ def test_convert_to_work():
     )
     print(expected_work)
     print(result_work)
-    shutil.rmtree("~/.openpecha")
     assert expected_work == result_work

@@ -19,8 +19,7 @@ classifiers = [
 
 dependencies = [
     "GitPython",
-    "openpecha",
-    "collection@git+https://github.com/OpenPecha/Collection.git"
+    "openpecha"
 
 ]
 

@@ -6,7 +6,9 @@ import shutil
 import os
 
 def test_convert_to_intance():
-    print(os.getcwd())
+    
+    
+    print(os.listdir(os.getcwd()))
     work_file = load_yaml(Path("/tests/data/test_work.yml"))
     instances = work_file["instances"]
     instance = instances[0]
@@ -26,7 +28,8 @@ def test_convert_to_intance():
 
 
 def test_convert_to_work():
-    print(os.getcwd())
+    print(os.listdir(os.getcwd()))
+
     work_file = load_yaml(Path("/tests/data/test_work.yml"))
     work_file["instances"] = None
     result_work = convert_to_work(work_file)

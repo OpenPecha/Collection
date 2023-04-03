@@ -21,6 +21,7 @@ def test_convert_to_intance():
     print(expected_instance)
     print(result_instance)
     assert expected_instance == result_instance
+    shutil.rmtree("/home/runner/.openpecha/")
     
 
 

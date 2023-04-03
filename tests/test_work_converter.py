@@ -7,9 +7,8 @@ import os
 
 def test_convert_to_intance():
     
-    
     print(os.listdir(os.getcwd()))
-    work_file = load_yaml(Path("/tests/data/test_work.yml"))
+    work_file = load_yaml(Path("/home/runner/work/Collection/tests/data/test_work.yml"))
     instances = work_file["instances"]
     instance = instances[0]
     result_instance = convert_to_instance(bdrc_work_id="WA0RT0010",instance=instance)
@@ -29,8 +28,7 @@ def test_convert_to_intance():
 
 def test_convert_to_work():
     print(os.listdir(os.getcwd()))
-
-    work_file = load_yaml(Path("/tests/data/test_work.yml"))
+    work_file = load_yaml(Path("/home/runner/work/Collection/tests/data/test_work.yml"))
     work_file["instances"] = None
     result_work = convert_to_work(work_file)
     expected_work = Work(

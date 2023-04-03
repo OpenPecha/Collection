@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil
 
 def test_convert_to_intance():
-    work_file = load_yaml(Path("/Users/jungtop/dev1/Collection/tests/data/test_work.yml"))
+    work_file = load_yaml(Path("/tests/data/test_work.yml"))
     instances = work_file["instances"]
     instance = instances[0]
     result_instance = convert_to_instance(bdrc_work_id="WA0RT0010",instance=instance)
@@ -24,7 +24,7 @@ def test_convert_to_intance():
 
 
 def test_convert_to_work():
-    work_file = load_yaml(Path("/Users/jungtop/dev1/Collection/tests/data/test_work.yml"))
+    work_file = load_yaml(Path("/tests/data/test_work.yml"))
     work_file["instances"] = None
     result_work = convert_to_work(work_file)
     expected_work = Work(
@@ -36,5 +36,5 @@ def test_convert_to_work():
     )
     print(expected_work)
     print(result_work)
-    shutil.rmtree("/Users/jungtop/.openpecha")
+    shutil.rmtree("~/.openpecha")
     assert expected_work == result_work

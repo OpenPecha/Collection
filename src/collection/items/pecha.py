@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from typing import Dict
-
 from collection.items.item import Item
 
 
@@ -12,10 +11,11 @@ class Pecha(Item):
     path: str
 
 
-if __name__ == "__main__":
-    print(Pecha.__annotations__)
-
-
-class PechaFragment(Pecha):
+@dataclass
+class PechaFragment(Item):
     "span= {'base':(start,end)}"
-    span: Dict
+    id: str
+    title: str
+    bdrc_work_id: str
+    path: str
+    spans: Dict[str,Dict]

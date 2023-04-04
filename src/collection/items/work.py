@@ -1,7 +1,5 @@
 from typing import List, Optional, Union
-
 from pydantic import BaseModel
-
 from collection.items.pecha import Pecha, PechaFragment
 
 
@@ -13,3 +11,6 @@ class Work(BaseModel):
     authors: List[str]
     best_instance: Optional[Pecha]
     instances: Optional[List[Union[Pecha, PechaFragment]]]
+
+    class Config:
+        arbitrary_types_allowed = True

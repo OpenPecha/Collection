@@ -2,7 +2,7 @@ from typing import Dict
 from collection.items.work import Work
 from collection.items.pecha import Pecha,PechaFragment
 from collection.utils import get_item
-
+import os
 
 def get_obj(instance,cls,bdrc_work_id):
     new_attrs = {}
@@ -10,11 +10,9 @@ def get_obj(instance,cls,bdrc_work_id):
     for attr in attrs:
         if attr == "bdrc_work_id":
             new_attrs.update({attr:bdrc_work_id})
-        elif attr not in instance.keys():
-            continue
-        else:
+        elif attr in instance.keys():
             new_attrs.update({attr:instance[attr]})
-    
+            
     path = get_item(instance["id"])
     new_attrs.update({"path":path})
     obj = cls(**new_attrs)
@@ -22,7 +20,7 @@ def get_obj(instance,cls,bdrc_work_id):
 
 
 def convert_to_instance(instance,bdrc_work_id):
-    if "span" not in instance.keys() or instance["span"] is None:
+    if "spans" not in instance.keys() or instance["spans"] is None:
         obj = get_obj(instance,Pecha,bdrc_work_id)
     else:
         obj = get_obj(instance,PechaFragment,bdrc_work_id)

@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from collection.items.pecha import Pecha
-from collection.views.plain_base import PlainBaseViewSerializer
+from collection.views.plain_text import PlainBaseViewSerializer
 
 serializer = PlainBaseViewSerializer()
 

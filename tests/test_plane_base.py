@@ -1,9 +1,9 @@
 from pathlib import Path
 
 from collection.items.pecha import Pecha
-from collection.views.plain_text import PlainBaseViewSerializer
+from collection.views.plain_text import PlainTextViewSerializer
 
-serializer = PlainBaseViewSerializer()
+serializer = PlainTextViewSerializer()
 
 
 def test_plane_base_view_serializer():

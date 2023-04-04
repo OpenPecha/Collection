@@ -18,6 +18,6 @@ def test_plane_base_view_serializer():
         path=pecha_path,
         bdrc_work_id=bdrc_id,
     )
-    views_path = serializer.serialize(pecha=pecha, output_dir=Path("./tests/data"))
+    views_path = serializer.serialize(item=pecha, output_dir=Path("./tests/data"))
     result_view = views_path[0].read_text(encoding="utf-8")
     assert result_view == expected_result

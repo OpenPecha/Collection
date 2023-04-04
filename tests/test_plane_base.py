@@ -2,12 +2,14 @@ from pathlib import Path
 from collection.converter.work_converter import convert_to_work
 from collection.items.pecha import Pecha
 from collection.views.plain_text import PlainTextViewSerializer
+import os
 
 serializer = PlainTextViewSerializer()
 
 
 def test_pecha_to_plane_base_view():
-    
+    print(os.getcwd())
+    print(os.listdir(os.getcwd()))
     expected_result = Path("./data/pecha_view_expected_result.txt").read_text(encoding="utf-8")
     pecha_path = "./tests/data/I3D4F1804"
     id = "I3D4F1804"

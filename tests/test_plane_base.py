@@ -8,9 +8,7 @@ serializer = PlainTextViewSerializer()
 
 
 def test_pecha_to_plane_base_view():
-    print(os.getcwd())
-    print(os.listdir(os.getcwd()))
-    expected_result = Path("./data/pecha_view_expected_result.txt").read_text(encoding="utf-8")
+    expected_result = Path("./tests/data/pecha_view_expected_result.txt").read_text(encoding="utf-8")
     pecha_path = "./tests/data/I3D4F1804"
     id = "I3D4F1804"
     title = ""
@@ -26,7 +24,7 @@ def test_pecha_to_plane_base_view():
     assert result_view == expected_result
 
 def test_work_to_plane_base_view():
-    expected_result = Path("./data/work_view_expected_result.txt").read_text(encoding="utf-8")
+    expected_result = Path("./tests/data/work_view_expected_result.txt").read_text(encoding="utf-8")
     work_path = Path("tests/data/work_sample.yml")
     work = convert_to_work(work_path)
     views_path = serializer.serialize(item=work,output_dir=Path("./tests/data"))

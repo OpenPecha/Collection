@@ -6,6 +6,7 @@ from collection.items.pecha import Pecha, PechaFragment
 from collection.items.work import Work
 from collection.views.view import View, ViewSerializer
 
+import uuid
 
 class PlainTextViewSerializer(ViewSerializer):
     def serialize(self, item: Item, output_dir: Path):
@@ -15,7 +16,6 @@ class PlainTextViewSerializer(ViewSerializer):
             view_path = self.serialize_work(item, output_dir)
         else:
             raise ValueError(f"{item} serializer not supported for PlainTextView")
-
         return view_path
 
     def serialize_pecha(self, pecha: Pecha, output_dir: Path):
@@ -33,11 +33,11 @@ class PlainTextViewSerializer(ViewSerializer):
         spans = pecha_fragment.spans
         base_names = list(spans.keys())
         bases = self.get_opf_bases(opf_path=pecha_fragment.path, base_names=base_names)
-
+        fragment_id = self.get_fragment_id()
         for base in bases:
             span = spans[base.stem]
             base_text = base.read_text(encoding="utf-8")
-            view_path = output_dir / f"frag_{base.name}"
+            view_path = output_dir / f"{base.name}_{fragment_id}"
             fragment_text = base_text[span["start"]:span["end"]]
             view_path.write_text(fragment_text, encoding="utf-8")
             views_path.append(view_path)
@@ -70,8 +70,11 @@ class PlainTextViewSerializer(ViewSerializer):
                     ret_bases.append(base)
         else:
             ret_bases = bases
-
         return ret_bases
+    
+    @staticmethod
+    def get_fragment_id():
+        return uuid.uuid4().hex[:4]
 
 
 class PlainTextView(View):

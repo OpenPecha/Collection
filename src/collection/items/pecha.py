@@ -14,7 +14,11 @@ class Pecha(Item):
 
 @dataclass
 class PechaFragment(Item):
-    "span= {'base':(start,end)}"
+    """span= {'base':{
+    start:0,
+    end:10
+    }}"""
+    
     id: str
     title: str
     bdrc_work_id: str

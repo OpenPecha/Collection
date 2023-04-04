@@ -24,6 +24,13 @@ def get_obj(instance, cls, bdrc_work_id):
 
 
 def convert_to_instance(instance, bdrc_work_id):
+    """
+    This function converts the dictionary of instance to Instance obj
+
+    :param instance: dictioinary of a instance
+    :param bdrc_work_id: BDRC work id
+    :return: echa or PechaFragment object
+    """
     if "spans" not in instance.keys() or instance["spans"] is None:
         obj = get_obj(instance, Pecha, bdrc_work_id)
     else:
@@ -33,6 +40,12 @@ def convert_to_instance(instance, bdrc_work_id):
 
 
 def get_instances(work_file):
+    """
+    This function returns the instance obj
+
+    :param work_file: Path obj of work file
+    :return: Pecha or PechaFragment objects
+    """
     objs = []
     instances = work_file["instances"]
     if instances is None:
@@ -45,6 +58,13 @@ def get_instances(work_file):
 
 
 def get_work_obj(work_file: Dict, instance_objs):
+    """
+    This function converst the work file to Work obj
+
+    :param work_file: Dictioniary of Work
+    :param instance_objs: Instance objs of the work
+    :return: Work obj
+    """
     new_attrs = {}
     attrs = Work.__annotations__.keys()
     for attr in attrs:
@@ -57,6 +77,12 @@ def get_work_obj(work_file: Dict, instance_objs):
 
 
 def convert_to_work(work_file: Path):
+    """
+    This function returns the work obj when a workfile is given
+
+    :param work_file: Path obj of work file
+    :return: Work obj
+    """
     work_dic = load_yaml(work_file)
     instance_objs = get_instances(work_dic)
     work_obj = get_work_obj(work_dic, instance_objs)

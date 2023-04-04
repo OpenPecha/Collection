@@ -18,7 +18,7 @@ class PechaFragment(Item):
     start:0,
     end:10
     }}"""
-    
+
     id: str
     title: str
     bdrc_work_id: str

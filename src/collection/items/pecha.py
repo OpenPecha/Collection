@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import Dict
+
 from collection.items.item import Item
 
 
@@ -18,4 +19,4 @@ class PechaFragment(Item):
     title: str
     bdrc_work_id: str
     path: str
-    spans: Dict[str,Dict]
+    spans: Dict[str, Dict]

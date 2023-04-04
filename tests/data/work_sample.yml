@@ -17,4 +17,3 @@ instances:
   diplomatic_id: str
   alignment_ids: []
   collection_ids: []
-

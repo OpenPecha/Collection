@@ -25,9 +25,8 @@ def test_convert_to_intance():
 
 
 def test_convert_to_work():
-    work_file = load_yaml(Path("./tests/data/test_work.yml"))
-    work_file["instances"] = None
-    result_work = convert_to_work(work_file)
+    result_work = convert_to_work(Path("./tests/data/test_work.yml"))
+    result_work.instances = None
     expected_work = Work(
         id="W8D2C5ECC",
         title="ཆོས་ཀྱི་དབྱིངས་སུ་བསྟོད་པ།",

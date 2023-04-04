@@ -2,8 +2,11 @@ from typing import Dict
 from collection.items.work import Work
 from collection.items.pecha import Pecha,PechaFragment
 from collection.utils import get_item
-import os
+from pathlib import Path
+from openpecha.utils import load_yaml
 
+
+import os
 def get_obj(instance,cls,bdrc_work_id):
     new_attrs = {}
     attrs = cls.__annotations__.keys()
@@ -50,9 +53,10 @@ def get_work_obj(work_file:Dict,instance_objs):
     obj = Work(**new_attrs)
     return obj
 
-def convert_to_work(work_file:Dict):
-    instance_objs = get_instances(work_file)
-    work_obj = get_work_obj(work_file,instance_objs)
+def convert_to_work(work_file:Path):
+    work_dic = load_yaml(work_file)
+    instance_objs = get_instances(work_dic)
+    work_obj = get_work_obj(work_dic,instance_objs)
     return work_obj
 
 

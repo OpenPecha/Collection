@@ -43,7 +43,7 @@ class PlainTextViewSerializer(ViewSerializer):
             view_path = output_dir / f"frag_{base.name}"
             fragment_text = base_text[span["start"]:span["end"]]
             view_path.write_text(fragment_text,encoding="utf-8")
-            views_path.append(views_path)
+            views_path.append(view_path)
         return views_path
 
     

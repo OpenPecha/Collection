@@ -3,6 +3,7 @@ from typing import List
 
 from openpecha.core.ids import get_collection_id
 from openpecha.utils import dump_yaml
+
 from collection.views.view import View
 
 

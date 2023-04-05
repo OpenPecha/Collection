@@ -12,10 +12,15 @@ class Pecha(Item):
     path: str
 
 
-if __name__ == "__main__":
-    print(Pecha.__annotations__)
+@dataclass
+class PechaFragment(Item):
+    """span= {'base':{
+    start:0,
+    end:10
+    }}"""
 
-
-class PechaFragment(Pecha):
-    "span= {'base':(start,end)}"
-    span: Dict
+    id: str
+    title: str
+    bdrc_work_id: str
+    path: str
+    spans: Dict[str, Dict]

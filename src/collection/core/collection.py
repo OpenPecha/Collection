@@ -5,6 +5,7 @@ from openpecha.core.ids import get_collection_id
 from openpecha.utils import dump_yaml
 
 from collection.views.view import View
+from collection.items.collection_meta import CollectionMeta
 
 
 class Collection:
@@ -15,6 +16,7 @@ class Collection:
         self.title = title
         self.views = views
         self.items = items
+        self.meta: CollectionMeta = None
         self.collection_dir = parent_dir / self.id
         self.collection_dir.mkdir(parents=True, exist_ok=True)
 
@@ -37,8 +39,9 @@ class Collection:
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()
-            serializer.serialize(item, view_dir)
-
+            item_views_map = serializer.serialize(item, view_dir)
+            self.item_views_map.update({view.name:item_views_map})
+            
     def save_views(self):
         for view in self.views:
             self.save_view(view)
@@ -46,7 +49,15 @@ class Collection:
     def save_readme(self):
         return NotImplementedError("Please implement saving readme")
 
+    def save_meta(self):
+        if self.meta is None:
+            raise ValueError("Meta is not initialised")
+        meta_path = self.collection_dir / "meta.yml"
+        meta_dic = dict(self.meta)
+        dump_yaml(meta_dic,meta_path)
+
     def save_collection(self):
+        self.item_views_map = {}
         self.save_collection_file()
         self.save_views()
         for view in self.views:

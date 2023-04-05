@@ -133,20 +133,5 @@ class PlainTextView(View):
         self.serializer = PlainTextViewSerializer
         super().__init__(self.name, self.serializer)
 
-    def serialize(self, item: Item, output_dir: Path):
-        """
-        This function calls the serialize method of serializer class
-
-        :param item: Item to be serialize
-        :outputdir: Directory to save the view
-        :return: item_views_map
-        item_views_map = {view_name :{pecha_id : view_names}     
-        }
-        """
-        views_path = self.serializer_class().serialize(item, output_dir)
-        view_names = [view_path.name for view_path in views_path]
-        item_views_map = {self.name:{item.id:view_names}}
-        return item_views_map
-
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         pass

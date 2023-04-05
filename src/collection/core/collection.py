@@ -52,3 +52,6 @@ class Collection:
         for view in self.views:
             view.save_catalog(self.collection_dir, self.items)
         self.save_readme()
+        return self.collection_dir
+
+        

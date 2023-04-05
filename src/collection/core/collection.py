@@ -33,34 +33,25 @@ class Collection:
         dump_yaml(collection, collection_file_path)
 
     def save_view(self, view: View):
-        views_paths = []
         view_dir = self.collection_dir / f"{self.collection_dir.stem}.opc" / view.name
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()
-            views_path = serializer.serialize(item, view_dir)
-            views_paths.extend(views_path)
-        return views_paths
-    
+            serializer.serialize(item, view_dir)
 
     def save_views(self):
-        views_paths = []
-
         for view in self.views:
-            views_path = self.save_view(view)
-            views_paths.extend(views_path)
-        return views_paths
-    
+            self.save_view(view)
 
     def save_readme(self):
         return NotImplementedError("Please implement saving readme")
 
     def save_collection(self):
         self.save_collection_file()
-        views_path = self.save_views()
+        self.save_views()
         for view in self.views:
             view.save_catalog(self.collection_dir, self.items)
         self.save_readme()
-        return views_path
+        return self.collection_dir
 
         

@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import List, Type
+from enum import Enum
 
 from collection.items.item import Item
 
@@ -26,3 +27,6 @@ class View:
 
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         return NotImplementedError("Please implement save catalog")
+
+class ViewEnum(Enum):
+    plain

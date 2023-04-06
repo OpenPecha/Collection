@@ -6,11 +6,12 @@ from openpecha.utils import dump_yaml
 
 from collection.views.view import View
 from collection.items.collection_meta import CollectionMeta
+from collection.items.item import Item
 
 
 class Collection:
     def __init__(
-        self, title: str, items, views: List[View], parent_dir: Path, id=None
+        self, title: str, items:List[Item], views: List[View], parent_dir: Path, id=None
     ) -> None:
         self.id = id or get_collection_id()
         self.title = title

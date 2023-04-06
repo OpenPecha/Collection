@@ -8,5 +8,5 @@ from collection.items.item import Item
 class Alignment(Item):
     id: str
     title: str
-    bdrc_work_id: str = None
     path: str
+    bdrc_work_id: str = None

@@ -129,7 +129,7 @@ class PlainTextView(View):
     """
 
     def __init__(self) -> None:
-        self.name = "PlainTextView"
+        self.name = "plaintextview"
         self.serializer = PlainTextViewSerializer
         super().__init__(self.name, self.serializer)
 

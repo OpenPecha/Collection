@@ -27,6 +27,3 @@ class View:
 
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         return NotImplementedError("Please implement save catalog")
-
-class ViewEnum(Enum):
-    plain

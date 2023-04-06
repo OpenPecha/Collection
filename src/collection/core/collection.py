@@ -36,12 +36,13 @@ class Collection:
         dump_yaml(collection, collection_file_path)
 
     def save_view(self, view: View):
+        self.item_views_map = {}
         view_dir = self.collection_dir / f"{self.collection_dir.stem}.opc" / view.name
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()
-            item_views_map = serializer.serialize(item, view_dir)
-            self.item_views_map.update({view.name:item_views_map})
+            serializer.serialize(item, view_dir)
+        self.item_views_map.update({view.name:serializer.item_views_map})
             
     def save_views(self):
         for view in self.views:

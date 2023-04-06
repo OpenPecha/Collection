@@ -29,8 +29,8 @@ class PlainTextViewSerializer(ViewSerializer):
         else:
             raise ValueError(f"{item} serializer not supported for PlainTextView")
         view_names = [view_path.name for view_path in view_paths]
-        item_views_map = {item.id:view_names}
-        return item_views_map
+        self.item_views_map = {item.id:view_names}
+        return view_paths
     
     def serialize_pecha(self, pecha: Pecha, output_dir: Path):
         """

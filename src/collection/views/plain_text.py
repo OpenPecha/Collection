@@ -23,13 +23,15 @@ class PlainTextViewSerializer(ViewSerializer):
         :return: List of view paths in Path object
         """
         if isinstance(item, Pecha):
-            view_path = self.serialize_pecha(item, output_dir)
+            view_paths = self.serialize_pecha(item, output_dir)
         elif isinstance(item, Work):
-            view_path = self.serialize_work(item, output_dir)
+            view_paths = self.serialize_work(item, output_dir)
         else:
             raise ValueError(f"{item} serializer not supported for PlainTextView")
-        return view_path
-
+        view_names = [view_path.name for view_path in view_paths]
+        self.item_views_map = {item.id:view_names}
+        return view_paths
+    
     def serialize_pecha(self, pecha: Pecha, output_dir: Path):
         """
         This function serializes the Pecha object
@@ -127,20 +129,9 @@ class PlainTextView(View):
     """
 
     def __init__(self) -> None:
-        name = "PlainTextView"
-        serializer = PlainTextViewSerializer
-        super().__init__(name, serializer)
-
-    def serialize(self, item: Item, output_dir: Path):
-        """
-        This function calls the serialize method of serializer class
-
-        :param item: Item to be serialize
-        :outputdir: Directory to save the view
-        :return: List of view paths in Path object
-        """
-        views_path = self.serializer_class().serialize(item, output_dir)
-        return views_path
+        self.name = "plaintext"
+        self.serializer = PlainTextViewSerializer
+        super().__init__(self.name, self.serializer)
 
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         pass

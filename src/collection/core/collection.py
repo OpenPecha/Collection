@@ -37,7 +37,7 @@ class Collection:
 
     def save_view(self, view: View):
         self.item_views_map = {}
-        view_dir = self.collection_dir / f"{self.collection_dir.stem}.opc" / view.name
+        view_dir = self.collection_dir / f"{self.collection_dir.stem}.opc" / "views"/ view.name
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()

@@ -14,6 +14,7 @@ def download_repo(item_id, item_path):
 
 
 def get_item(item_id):
+    
     item_path = BASE_PATH.as_posix() + "/" + item_id
     if os.path.exists(item_path):
         shutil.rmtree(item_path)

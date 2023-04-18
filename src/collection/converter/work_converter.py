@@ -9,6 +9,8 @@ from collection.utils import get_item
 
 
 def get_obj(instance, cls, bdrc_work_id):
+    if instance["op_id"] is None:
+        return
     new_attrs = {}
     attrs = cls.__annotations__.keys()
     for attr in attrs:
@@ -17,7 +19,8 @@ def get_obj(instance, cls, bdrc_work_id):
         elif attr in instance.keys():
             new_attrs.update({attr: instance[attr]})
 
-    path = get_item(instance["id"])
+    
+    path = get_item(instance["op_id"])
     new_attrs.update({"path": path})
     obj = cls(**new_attrs)
     return obj
@@ -32,11 +35,9 @@ def convert_to_instance(instance, bdrc_work_id):
     :return: echa or PechaFragment object
     """
     if "spans" not in instance.keys() or instance["spans"] is None:
-        obj = get_obj(instance, Pecha, bdrc_work_id)
+        return get_obj(instance, Pecha, bdrc_work_id)
     else:
-        obj = get_obj(instance, PechaFragment, bdrc_work_id)
-
-    return obj
+        return get_obj(instance, PechaFragment, bdrc_work_id)
 
 
 def get_instances(work_file):
@@ -53,7 +54,8 @@ def get_instances(work_file):
 
     for instance in instances:
         obj = convert_to_instance(instance, work_file["bdrc_work_id"])
-        objs.append(obj)
+        if obj:
+            objs.append(obj)
     return objs
 
 
@@ -70,7 +72,10 @@ def get_work_obj(work_file: Dict, instance_objs):
     for attr in attrs:
         if attr == "instances":
             continue
-        new_attrs.update({attr: work_file[attr]})
+        elif attr == "id":
+            new_attrs.update({attr:work_file["op_id"]})
+        else:
+            new_attrs.update({attr: work_file[attr]})
     new_attrs.update({"instances": instance_objs})
     obj = Work(**new_attrs)
     return obj

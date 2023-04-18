@@ -9,6 +9,7 @@ class Pecha(Item):
     id: str
     title: str
     bdrc_work_id: str
+    bdrc_instance_id : str
     path: str
 
 
@@ -22,5 +23,6 @@ class PechaFragment(Item):
     id: str
     title: str
     bdrc_work_id: str
+    bdrc_instance_id: str
     path: str
     spans: Dict[str, Dict]

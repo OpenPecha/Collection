@@ -71,7 +71,6 @@ def get_instances(work_file):
     instances = work_file["instances"]
     if instances is None:
         return
-
     for instance in instances:
         obj = convert_to_instance(instance, work_file["bdrc_work_id"])
         if obj:

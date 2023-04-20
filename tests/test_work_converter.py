@@ -4,9 +4,11 @@ from pathlib import Path
 from openpecha.utils import load_yaml
 
 from collection.items.work import Pecha, convert_to_instance, get_work,PechaFragment
+from collection.utils import get_item
 
 
 def test_convert_to_intance():
+    get_item("I3D4F1804")
     work_file = load_yaml(Path("tests/data/work_sample.yml"))
     instances = work_file["instances"]
     instance = instances[0]
@@ -29,7 +31,7 @@ def test_convert_to_intance():
 
 
 def test_convert_to_work():
-    result_work = get_work(Path("tests/data/work_sample.yml"))
+    result_work = get_work(Path("tests/data/work_sample_no_instance.yml"))
     result_work["instances"] = None
     expected_work = {
         "id": "W8D2C5ECC",

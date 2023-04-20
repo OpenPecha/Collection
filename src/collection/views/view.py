@@ -1,6 +1,5 @@
 from pathlib import Path
 from typing import List, Type
-from enum import Enum
 
 from collection.items.item import Item
 

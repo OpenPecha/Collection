@@ -1,9 +1,8 @@
-from typing import List, Optional, Union,Dict
 from pathlib import Path
-
-from pydantic import BaseModel
+from typing import Dict, List, Optional, Union
 
 from openpecha.utils import load_yaml
+from pydantic import BaseModel
 
 from collection.items.pecha import Pecha, PechaFragment
 from collection.utils import get_item
@@ -18,15 +17,15 @@ class Work(BaseModel):
     best_instance: Optional[Pecha]
     instances: Optional[List[Union[Pecha, PechaFragment]]]
 
-    def __init__(self, work_file:Path) -> None:
+    def __init__(self, work_file: Path) -> None:
         work = get_work(work_file)
         super().__init__(**work)
 
     class Config:
         arbitrary_types_allowed = True
-    
-    def serialize(self,serializer,output_dir):
-        views_path = serializer.serialize_work(self,output_dir)
+
+    def serialize(self, serializer, output_dir):
+        views_path = serializer.serialize_work(self, output_dir)
         return views_path
 
 
@@ -41,7 +40,6 @@ def get_obj(instance, cls, bdrc_work_id):
         elif attr in instance.keys():
             new_attrs.update({attr: instance[attr]})
 
-    
     path = get_item(instance["id"])
     new_attrs.update({"path": Path(path)})
     obj = cls(**new_attrs)
@@ -95,7 +93,7 @@ def get_work_dic(work_file: Dict, instance_objs):
         if attr == "instances":
             continue
         elif attr == "id":
-            work_dic.update({attr:work_file["id"]})
+            work_dic.update({attr: work_file["id"]})
         else:
             work_dic.update({attr: work_file[attr]})
     work_dic.update({"instances": instance_objs})

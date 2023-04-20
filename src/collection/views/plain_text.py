@@ -4,8 +4,9 @@ from typing import List
 from collection.items.item import Item
 from collection.items.pecha import Pecha, PechaFragment
 from collection.items.work import Work
+from collection.utils import get_fragment_id, get_opf_bases
 from collection.views.view import View, ViewSerializer
-from collection.utils import get_opf_bases,get_fragment_id
+
 
 class PlainTextViewSerializer(ViewSerializer):
     """
@@ -29,7 +30,6 @@ class PlainTextViewSerializer(ViewSerializer):
             views_path.append(view_path)
         return views_path
 
-
     def serialize_pecha_fragment(self, pecha_fragment: PechaFragment, output_dir: Path):
         """
         This function serializes the PechaFragment to plaintext
@@ -49,7 +49,6 @@ class PlainTextViewSerializer(ViewSerializer):
             view_path.write_text(base_text, encoding="utf-8")
             views_path.append(view_path)
         return views_path
-
 
     def serialize_work(self, work: Work, output_dir: Path):
         """
@@ -74,7 +73,6 @@ class PlainTextViewSerializer(ViewSerializer):
         return views_paths
 
 
-
 class PlainTextView(View):
     """
     Class representing Plain Text View
@@ -88,7 +86,6 @@ class PlainTextView(View):
         self.name = "plaintext"
         self.serializer = PlainTextViewSerializer
         super().__init__(self.name, self.serializer)
-
 
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         pass

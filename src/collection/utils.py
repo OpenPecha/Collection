@@ -1,11 +1,10 @@
 import os
 import shutil
 import uuid
-
-
-from typing import List
-from git import Repo
 from pathlib import Path
+from typing import List
+
+from git import Repo
 from openpecha.config import BASE_PATH
 
 OPENPECHA_DATA_PREFIX_URL = "https://github.com/OpenPecha-Data"
@@ -18,7 +17,7 @@ def download_repo(item_id, item_path):
 
 
 def get_item(item_id):
-    
+
     item_path = BASE_PATH.as_posix() + "/" + item_id
     if os.path.exists(item_path):
         shutil.rmtree(item_path)
@@ -27,23 +26,24 @@ def get_item(item_id):
 
 
 def get_fragment_id():
-        return uuid.uuid4().hex[:4]
+    return uuid.uuid4().hex[:4]
 
-def get_opf_bases(opf_path: str, base_names: List = None):
-        """
-        This function gives the bases of a given opf or path of bases
 
-        :param opf_path: path of opf
-        :base_names: List of Base names
-        :return: list of bases path in Path obj
-        """
-        pecha_id = Path(opf_path).stem
-        bases = list(Path(f"{opf_path}/{pecha_id}.opf/base").iterdir())
-        ret_bases = []
-        if base_names:
-            for base in bases:
-                if base.stem in base_names:
-                    ret_bases.append(base)
-        else:
-            ret_bases = bases
-        return ret_bases
+def get_opf_bases(opf_path: Path, base_names: List = None):
+    """
+    This function gives the bases of a given opf or path of bases
+
+    :param opf_path: path of opf
+    :base_names: List of Base names
+    :return: list of bases path in Path obj
+    """
+    pecha_id = opf_path.stem
+    bases = list(Path(f"{opf_path.as_posix()}/{pecha_id}.opf/base").iterdir())
+    ret_bases = []
+    if base_names:
+        for base in bases:
+            if base.stem in base_names:
+                ret_bases.append(base)
+    else:
+        ret_bases = bases
+    return ret_bases

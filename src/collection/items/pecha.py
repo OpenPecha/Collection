@@ -72,7 +72,7 @@ class PechaFragment(Item):
             )
             base_text = base_text_path.read_text(encoding="utf-8")
             pagination_layer_path = Path(
-                f"{self.path}/{self.path.stem}.opf/layers/{base_id}/pagination.yml"
+                f"{self.path}/{self.path.stem}.opf/layers/{base_id}/Pagination.yml"
             )
             pagination_layer = load_yaml(pagination_layer_path)
             new_base_text, new_pagination_layer = self.mod_layer(

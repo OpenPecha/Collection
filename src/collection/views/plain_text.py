@@ -10,7 +10,6 @@ from collection.utils import get_opf_bases,get_fragment_id
 class PlainTextViewSerializer(ViewSerializer):
     """
     Class represeting the PlainText View Serializer
-
     """
 
     def serialize(self, item: Item, output_dir: Path):
@@ -26,9 +25,10 @@ class PlainTextViewSerializer(ViewSerializer):
         elif isinstance(item, Work):
             view_paths = self.serialize_work(item, output_dir)
         else:
-            raise ValueError(f"{item} serializer not supported for PlainTextView")
+            raise ValueError(f"{item} Serializer not supported or PlainTextView")
         return view_paths
     
+
     def serialize_pecha(self, pecha: Pecha, output_dir: Path):
         """
         This function serializes the Pecha to plaintext
@@ -46,7 +46,8 @@ class PlainTextViewSerializer(ViewSerializer):
             views_path.append(view_path)
         return views_path
 
-    def serialize_pechaFragment(self, pecha_fragment: PechaFragment, output_dir: Path):
+
+    def serialize_pecha_fragment(self, pecha_fragment: PechaFragment, output_dir: Path):
         """
         This function serializes the PechaFragment to plaintext
 
@@ -68,6 +69,7 @@ class PlainTextViewSerializer(ViewSerializer):
             views_path.append(view_path)
         return views_path
 
+
     def serialize_work(self, work: Work, output_dir: Path):
         """
         This function serializes the Work Object based on the type of instances
@@ -84,18 +86,17 @@ class PlainTextViewSerializer(ViewSerializer):
             if isinstance(instance, Pecha):
                 views_path = self.serialize_pecha(instance, output_dir)
             elif isinstance(instance, PechaFragment):
-                views_path = self.serialize_pechaFragment(instance, output_dir)
+                views_path = self.serialize_pecha_fragment(instance, output_dir)
             else:
                 raise ValueError(f"{instance} Not a Valid Work Instance")
             views_paths.extend(views_path)
-
         return views_paths
 
 
 
 class PlainTextView(View):
     """
-    Class representing Plain text view
+    Class representing Plain Text View
 
     Attributes
     name: Name of the View
@@ -106,6 +107,7 @@ class PlainTextView(View):
         self.name = "plaintext"
         self.serializer = PlainTextViewSerializer
         super().__init__(self.name, self.serializer)
+
 
     def save_catalog(self, collection_dir: Path, items: List[Item]):
         pass

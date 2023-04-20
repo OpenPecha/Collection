@@ -44,6 +44,9 @@ class PechaFragment(Item):
 
 
     def fragment_pecha(self):
+        """
+        This function removes the bases and layers not included in pecha fragment from the source opf.
+        """
         required_bases = dict(self.spans)
         bases = get_opf_bases(opf_path=self.path)
         for base in bases:
@@ -61,6 +64,14 @@ class PechaFragment(Item):
 
 
     def mod_layer(self,span,base_text,pagination_layer):
+        """
+        This function gives the new base and pagination layer bases on the span.
+        :param span: span of the text
+        :param base_text: initial base text
+        :param pagination_layer: intial pagination layer of the base
+        :return base_text: modified base layer
+        :return paignation_layer: modified pagination layer
+        """
         start = span["start"]
         end = span["end"]
         new_annotations = {}
@@ -77,6 +88,12 @@ class PechaFragment(Item):
 
 
     def is_span1_included_in_span2(self,span1,span2):
+        """
+        This function checks if the span1 is included or overlap in span2
+        :param span1: span to be checked 
+        :param span2: pool span where target span is checked
+        :return bool: gives boolean on whether the span is included or overlap
+        """
         start1, end1 = span1
         start2, end2 = span2
         if start1 <= start2 and end1 >= end2:

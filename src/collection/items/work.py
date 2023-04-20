@@ -40,14 +40,14 @@ def get_obj(instance, cls, bdrc_work_id):
 
     
     path = get_item(instance["id"])
-    new_attrs.update({"path": path})
+    new_attrs.update({"path": Path(path)})
     obj = cls(**new_attrs)
     return obj
 
 
 def convert_to_instance(instance, bdrc_work_id):
     """
-    This function converts the dictionary of instance to Instance obj
+    This function converts the dictionary of string instance to Instance obj
 
     :param instance: dictioinary of a instance
     :param bdrc_work_id: BDRC work id

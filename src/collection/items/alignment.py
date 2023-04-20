@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict
+from pathlib import Path
 
 from collection.items.item import Item
 
@@ -8,5 +8,5 @@ from collection.items.item import Item
 class Alignment(Item):
     id: str
     title: str
-    path: str
+    path: Path
     bdrc_work_id: str = None

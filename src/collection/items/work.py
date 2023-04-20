@@ -6,7 +6,6 @@ from pydantic import BaseModel
 from openpecha.utils import load_yaml
 
 from collection.items.pecha import Pecha, PechaFragment
-from collection.items.work import Work
 from collection.utils import get_item
 
 
@@ -29,7 +28,7 @@ class Work(BaseModel):
 
 
 def get_obj(instance, cls, bdrc_work_id):
-    if instance["op_id"] is None:
+    if instance["id"] is None:
         return
     new_attrs = {}
     attrs = cls.__annotations__.keys()
@@ -40,7 +39,7 @@ def get_obj(instance, cls, bdrc_work_id):
             new_attrs.update({attr: instance[attr]})
 
     
-    path = get_item(instance["op_id"])
+    path = get_item(instance["id"])
     new_attrs.update({"path": path})
     obj = cls(**new_attrs)
     return obj
@@ -93,7 +92,7 @@ def get_work_dic(work_file: Dict, instance_objs):
         if attr == "instances":
             continue
         elif attr == "id":
-            work_dic.update({attr:work_file["op_id"]})
+            work_dic.update({attr:work_file["id"]})
         else:
             work_dic.update({attr: work_file[attr]})
     work_dic.update({"instances": instance_objs})

@@ -3,20 +3,26 @@ from pathlib import Path
 
 from openpecha.utils import load_yaml
 
-from collection.items.work import Pecha, convert_to_instance, get_work
+from collection.items.work import Pecha, convert_to_instance, get_work,PechaFragment
 
 
 def test_convert_to_intance():
-    work_file = load_yaml(Path("./tests/data/test_work.yml"))
+    work_file = load_yaml(Path("tests/data/work_sample.yml"))
     instances = work_file["instances"]
     instance = instances[0]
     result_instance = convert_to_instance(bdrc_work_id="WA0RT0010", instance=instance)
-    expected_instance = Pecha(
+    print(result_instance)
+    expected_instance = PechaFragment(
         id="I3D4F1804",
+        path=Path("/home/runner/.openpecha/I3D4F1804"),
+        spans={"I3CN3916":
+               {"start":0,
+                "end":100}},
         title="དྷརྨ་དྷ་ཏུ་སྟ་པ།",
         bdrc_work_id="WA0RT0010",
-        path=Path("/home/runner/.openpecha/I9D4B6344"),
+        bdrc_instance_id=None
     )
+    
     print(expected_instance)
     print(result_instance)
     assert expected_instance == result_instance
@@ -24,7 +30,7 @@ def test_convert_to_intance():
 
 
 def test_convert_to_work():
-    result_work = get_work(Path("./tests/data/test_work.yml"))
+    result_work = get_work(Path("tests/data/work_sample.yml"))
     result_work["instances"] = None
     expected_work = {
         "id": "W8D2C5ECC",

@@ -10,7 +10,10 @@ instances:
 - id: I3D4F1804
   title: དྷརྨ་དྷ་ཏུ་སྟ་པ།
   language: bo
-  spans: null
+  spans:
+    I3CN3916:
+      start: 0
+      end: 100
   diplomatic_id: str
   alignment_ids: []
   collection_ids: []

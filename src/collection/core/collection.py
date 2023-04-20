@@ -40,7 +40,7 @@ class Collection:
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()
-            views_path = serializer.serialize(item, view_dir)
+            views_path = item.serialize(serializer, view_dir)
             if views_path:
                 view_names = [view_path.name for view_path in views_path]
                 self.item_views_map.update({view.name:{item.id:view_names}})

@@ -24,7 +24,10 @@ class Work(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
-
+    
+    def serialize(self,serializer,output_dir):
+        views_path = serializer.serialize_work(self,output_dir)
+        return views_path
 
 
 def get_obj(instance, cls, bdrc_work_id):

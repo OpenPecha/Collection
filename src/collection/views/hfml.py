@@ -13,23 +13,6 @@ class HFMLViewSerializer(ViewSerializer):
     """
     Class represting the HFML View Serializer
     """
-    def serialize(self, item: Item, output_dir: Path)->List[Path]:
-        """
-        This function calls the particular serializer based on item
-
-        :param item: Item to be serialize
-        :outputdir: Directory to save the view
-        :return: List of view paths in Path object
-        """
-        
-        if isinstance(item,Pecha):
-            view_paths = self.serialize_pecha(item, output_dir)
-        elif isinstance(item,Work):
-            view_paths = self.serialize_work(item,output_dir)
-        else:
-            raise ValueError(f"{item} Serializer not supported or PlainTextView")
-        return view_paths
-
 
     def serialize_pecha(self, item, output_dir: Path) -> List[Path]:
         """

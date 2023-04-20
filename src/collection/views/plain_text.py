@@ -12,23 +12,6 @@ class PlainTextViewSerializer(ViewSerializer):
     Class represeting the PlainText View Serializer
     """
 
-    def serialize(self, item: Item, output_dir: Path):
-        """
-        This function calls the particular serializer based on item
-
-        :param item: Item to be serialize
-        :outputdir: Directory to save the view
-        :return: List of view paths in Path object
-        """
-        if isinstance(item, Pecha):
-            view_paths = self.serialize_pecha(item, output_dir)
-        elif isinstance(item, Work):
-            view_paths = self.serialize_work(item, output_dir)
-        else:
-            raise ValueError(f"{item} Serializer not supported or PlainTextView")
-        return view_paths
-    
-
     def serialize_pecha(self, pecha: Pecha, output_dir: Path):
         """
         This function serializes the Pecha to plaintext
@@ -61,11 +44,9 @@ class PlainTextViewSerializer(ViewSerializer):
         bases = get_opf_bases(opf_path=pecha_fragment.path, base_names=base_names)
         fragment_id = get_fragment_id()
         for base in bases:
-            span = spans[base.stem]
             base_text = base.read_text(encoding="utf-8")
             view_path = output_dir / f"{base.stem}_{fragment_id}.txt"
-            fragment_text = base_text[span["start"]:span["end"]]
-            view_path.write_text(fragment_text, encoding="utf-8")
+            view_path.write_text(base_text, encoding="utf-8")
             views_path.append(view_path)
         return views_path
 

@@ -16,6 +16,11 @@ class Pecha(Item):
     bdrc_work_id: Optional[str] = None
     bdrc_instance_id : Optional[str] = None
 
+    def serialize(self,serializer,output_dir):
+        views_path = serializer.serialize_pecha(self,output_dir)
+        return views_path
+        
+
 
 @dataclass
 class PechaFragment(Item):
@@ -42,6 +47,10 @@ class PechaFragment(Item):
         self.bdrc_work_id = bdrc_work_id
         self.fragment_pecha()
 
+
+    def serialize(self,serializer,output_dir):
+        views_path = serializer.serialize_pecha_fragment(self,output_dir)
+        return views_path
 
     def fragment_pecha(self):
         """

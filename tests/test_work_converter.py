@@ -12,7 +12,7 @@ def test_convert_to_intance():
     instance = instances[0]
     result_instance = convert_to_instance(bdrc_work_id="WA0RT0010", instance=instance)
     expected_instance = Pecha(
-        id="I9D4B6344",
+        id="I3D4F1804",
         title="དྷརྨ་དྷ་ཏུ་སྟ་པ།",
         bdrc_work_id="WA0RT0010",
         path=Path("/home/runner/.openpecha/I9D4B6344"),

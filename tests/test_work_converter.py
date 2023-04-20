@@ -31,7 +31,7 @@ def test_convert_to_work():
         "title": "ཆོས་ཀྱི་དབྱིངས་སུ་བསྟོད་པ།",
         "alternative_title": "དྷརྨདྷāཏུསྟབ༹",
         "bdrc_work_id": "WA0RT0010",
-        "authors": ["龙树"],
+        "authors": ["龙树","ནག་ཚོ་ལོ་ཙཱ་བ།"],
         "best_instance": None,
         "instances": None,
     }

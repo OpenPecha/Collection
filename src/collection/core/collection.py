@@ -4,14 +4,19 @@ from typing import List
 from openpecha.core.ids import get_collection_id
 from openpecha.utils import dump_yaml
 
-from collection.views.view import View
 from collection.items.collection_meta import CollectionMeta
 from collection.items.item import Item
+from collection.views.view import View
 
 
 class Collection:
     def __init__(
-        self, title: str, items:List[Item], views: List[View], parent_dir: Path, id=None
+        self,
+        title: str,
+        items: List[Item],
+        views: List[View],
+        parent_dir: Path,
+        id=None,
     ) -> None:
         self.id = id or get_collection_id()
         self.title = title
@@ -36,14 +41,20 @@ class Collection:
         dump_yaml(collection, collection_file_path)
 
     def save_view(self, view: View):
-        self.item_views_map = {}
-        view_dir = self.collection_dir / f"{self.collection_dir.stem}.opc" / "views"/ view.name
+        view_dir = (
+            self.collection_dir
+            / f"{self.collection_dir.stem}.opc"
+            / "views"
+            / view.name
+        )
         view_dir.mkdir(parents=True, exist_ok=True)
         for item in self.items:
             serializer = view.serializer_class()
-            serializer.serialize(item, view_dir)
-        self.item_views_map.update({view.name:serializer.item_views_map})
-            
+            views_path = item.serialize(serializer, view_dir)
+            if views_path:
+                view_names = [view_path.name for view_path in views_path]
+                self.item_views_map.update({view.name: {item.id: view_names}})
+
     def save_views(self):
         for view in self.views:
             self.save_view(view)
@@ -53,10 +64,14 @@ class Collection:
 
     def save_meta(self):
         if self.meta is None:
-            raise ValueError("Meta is not initialised")
+            meta = self.get_meta()
         meta_path = self.collection_dir / "meta.yml"
-        meta_dic = dict(self.meta)
-        dump_yaml(meta_dic,meta_path)
+        meta_dic = dict(meta)
+        dump_yaml(meta_dic, meta_path)
+
+    def get_meta(self):
+        meta = CollectionMeta(collection_id=self.id, item_views_map=self.item_views_map)
+        return meta
 
     def save_collection(self):
         self.item_views_map = {}
@@ -66,5 +81,3 @@ class Collection:
             view.save_catalog(self.collection_dir, self.items)
         self.save_readme()
         return self.collection_dir
-
-        
